@@ -47,7 +47,9 @@
       log( 'data:', data );
   } );
   
-  stream = fs.createReadStream( path, { bufferSize : 60 } ); // output -> 60 bytes packets
+  // stream output -> 60 bytes packets, it's the max limit,
+  // packets are not guaranteed to have fixed size.
+  stream = fs.createReadStream( path, { bufferSize : 60 } );
   ..
   stream.pipe( filter );
   ..
