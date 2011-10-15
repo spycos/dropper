@@ -31,7 +31,7 @@
       filter = new dropper( dropSize );
 ```
 
-> Try this, or just run the __[example]()__ :
+> Try this, or just run the __[example](https://github.com/rootslab/dropper/blob/master/examples/simple.js)__ :
 
 ``` javascript
   var log = console.log,
