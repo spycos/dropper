@@ -52,7 +52,6 @@ __Dropper__ is a filter stream that produces fixed size data packets, from every
  $ node test/data_integrity.js
 ```
 
-
 ## License 
 
 (The MIT License)
