@@ -40,6 +40,8 @@
       filter = new Dropper( 36 ); // output -> 36 bytes data packets
 
   filter.on( 'data', function ( data ) {
+      // all packets will have fixed length ( dropSize ),
+      // except the last that could be <= dropSize
       log( 'data:', data );
   } );
   
