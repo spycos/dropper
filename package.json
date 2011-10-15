@@ -1,0 +1,16 @@
+{
+    "name": "dropper"
+  , "version": "0.0.1"
+  , "description": "Dropper, is a filter stream that produces fixed size data packets, from every other stream."
+  , "homepage" : "https://github.com/rootslab/dropper"
+  ,"repository" : {
+        "type" : "git"
+        ,"url" : "git://github.com/rootslab/dropper.git"
+    }
+  , "keywords" : [ "stream", "dropper", "streams" ]
+  , "tags":[ "dropper", "streams", "stream" ]
+  , "author": "Guglielmo Ferri <44gatti@gmail.com>"
+  , "dependencies": {}
+  , "main": "index"
+  , "engines": { "node": ">=0.4.x" }
+}
