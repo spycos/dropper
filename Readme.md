@@ -26,6 +26,11 @@
 
 ###Simple Usage
 
+``` javascript
+  var dropSize = 1024 * 1024, // bytes
+      filter = new dropper( dropSize );
+```
+
 > Try this, or just run the __[example]()__ :
 
 ``` javascript
