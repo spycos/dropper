@@ -4,6 +4,8 @@
 > It simply _"slows down"_ or _"bufferizes"_ data packets, from a source stream, depending on the size
 > of the packets received and the size of output buffer specified ( dropSize ).
 
+> __Dropper__ inherits from __Stream__, then you can use it in the way you __already__ use other streams.
+
 ---------
 
 ###Installation
