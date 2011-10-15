@@ -29,7 +29,7 @@
 ###Simple Usage
 
 ``` javascript
-  var dropSize = 1024 * 1024, // bytes
+  var dropSize = 64 * 1024, // <- default bytes value
       filter = new dropper( dropSize );
 ```
 
