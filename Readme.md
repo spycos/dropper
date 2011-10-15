@@ -45,7 +45,7 @@
   
   stream = fs.createReadStream( path, { bufferSize : 60 } ); // output -> 60 bytes packets
   ..
-  stream.pipe( filter, { end : true } );
+  stream.pipe( filter );
   ..
   
 ```
