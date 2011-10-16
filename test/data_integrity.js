@@ -56,7 +56,7 @@ fs.readFile( path, null, function ( err, fdata ) {
     filter.on( 'end', function () {
         log( yc + 'filter stream ends,', filter.sent, 'packet(s) sent,', filter.received, 'received' + ec );
         o = 0;
-        var resultChecksum = crypto.createHash( 'sha1' ).update( fdata ).digest( 'hex' );
+        var resultChecksum = crypto.createHash( 'sha1' ).update( output ).digest( 'hex' );
         log( xc + 'source file:', path + '\nsize:', fdata.length, 'bytes' + ec );
         try {
             assert.strictEqual( resultChecksum, checksum, 'Test Failed: data_integrity, bad checksum ' );
