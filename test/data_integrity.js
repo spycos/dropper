@@ -22,49 +22,55 @@ fs.readFile( path, null, function ( err, fdata ) {
     
     // dropper
 
-    filter = new Dropper( 36 );
+    filter = new Dropper( 96 );
 
     filter.on( 'data', function ( data ) {
-        log( tc + 'filter emits data:', data, ec );
-        data.copy( output, o );
-        o += data.length;
-        if ( o === output.length ) {
-            // data.length === filter.dropsize, except for last packet ( <= )
+        filter.pause(); // <- pausing filter
+        setTimeout( function (){
+            log( tc + 'filter emits data:', data, ec );
+            data.copy( output, o );
+            o += data.length;
+            if ( o === output.length ) {
+                // data.length === filter.dropsize, except for last packet ( <= )
+                try {
+                    assert.ok( data.length < filter.dropSize, 'Test Failed: data_integrity, last packet bad size ' );
+                    log( yc + 'Test ok ( last packet length <= dropSize ):', gc + data.length, '<=', rc + filter.dropSize + ec );
+                } catch ( err ) {
+                    log( rc + '\nsomething went wrong..\n' );
+                    log( err.stack, ec );
+                    filter.destroy();
+                }
+                return;
+            }
             try {
-                assert.ok( data.length < filter.dropSize, 'Test Failed: data_integrity, last packet bad size ' );
-                log( yc + 'Test ok ( last packet length <= dropSize ):', gc + data.length, '<=', rc + filter.dropSize + ec );
+                assert.strictEqual( data.length, filter.dropSize, 'Test Failed: data_integrity, bad packet size ' );
+                log( yc + 'Test ( packet length === dropSize ) ok:', gc + data.length, '===', rc + filter.dropSize + ec );
             } catch ( err ) {
                 log( rc + '\nsomething went wrong..\n' );
                 log( err.stack, ec );
                 filter.destroy();
             }
-            return;
-        }
-        try {
-            assert.strictEqual( data.length, filter.dropSize, 'Test Failed: data_integrity, bad packet size ' );
-            log( yc + 'Test ( packet length === dropSize ) ok:', gc + data.length, '===', rc + filter.dropSize + ec );
-        } catch ( err ) {
-            log( rc + '\nsomething went wrong..\n' );
-            log( err.stack, ec );
-            filter.destroy();
-        }
+            filter.resume(); // <- resuming filter
+        }, 70 );
     } );
 
     filter.on( 'drain', function () {
     } );
 
     filter.on( 'end', function () {
-        log( yc + 'filter stream ends,', filter.sent, 'packet(s) sent,', filter.received, 'received' + ec );
-        o = 0;
-        var resultChecksum = crypto.createHash( 'sha1' ).update( output ).digest( 'hex' );
-        log( xc + 'source file:', path + '\nsize:', fdata.length, 'bytes' + ec );
-        try {
-            assert.strictEqual( resultChecksum, checksum, 'Test Failed: data_integrity, bad checksum ' );
-            log( yc + 'Test ok:', gc + checksum, '===', rc + resultChecksum + ec );
-        } catch ( err ) {
-            log( rc + '\nsomething went wrong..\n' );
-            log( err.stack, ec );
-        }
+        setTimeout( function () {
+            log( yc + 'filter stream ends,', filter.sent, 'packet(s) sent,', filter.received, 'received' + ec );
+            o = 0;
+            var resultChecksum = crypto.createHash( 'sha1' ).update( output ).digest( 'hex' );
+            log( xc + 'source file:', path + '\nsize:', fdata.length, 'bytes' + ec );
+            try {
+                assert.strictEqual( resultChecksum, checksum, 'Test Failed: data_integrity, bad checksum ' );
+                log( yc + 'Test ok:', gc + checksum, '===', rc + resultChecksum + ec );
+            } catch ( err ) {
+                log( rc + '\nsomething went wrong..\n' );
+                log( err.stack, ec );
+            }
+        }, 70 );
     } );
 
     filter.on( 'close', function () {

@@ -18,8 +18,10 @@ fs.stat( path, function ( err, stats ) {
 filter = new Dropper( 36 );
 
 filter.on( 'data', function ( data ) {
+    filter.pause(); // // <- pausing filter
     log( gc + 'filter emits data, length:', data.length + ec );
     log( bc + 'data:', data, ec );
+    filter.resume(); // <- resuming filter
 } );
 
 filter.on( 'drain', function () {
