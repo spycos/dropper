@@ -20,7 +20,6 @@ filter = new Dropper( 36 );
 filter.on( 'data', function ( data ) {
     log( gc + 'filter emits data, length:', data.length + ec );
     log( bc + 'data:', data, ec );
-    log();
 } );
 
 filter.on( 'drain', function () {
@@ -28,7 +27,7 @@ filter.on( 'drain', function () {
 } );
 
 filter.on( 'end', function () {
-    log( rc + 'filter stream ends,', filter.sent, 'packet(s) sent,', filter.received, 'received\n' + ec );
+    log( rc + '\nfilter stream ends,', filter.sent, 'packet(s) sent,', filter.received, 'received\n' + ec );
 } );
 
 filter.on( 'close', function () {
