@@ -1,11 +1,13 @@
 # Dropper
 
-> __Dropper__ is a ( nodeJS ) __filter stream__ that produces __fixed size__ data packets, from every other __stream__, 
-> using a __single circular Buffer__, and mantaning __very good perfomances__.
-> It simply _"slows down"_ or _"bufferizes"_ incoming data packets, from a source stream, depending on the size
-> of the packets received and the size of output buffer specified ( dropSize ).
+> __Dropper__ is a ( nodeJS ) __filter stream__ that produces __fixed size__ data packets from __any stream__
+> ( using a __single circular Buffer__ and mantaining __very good perfomances__ ).
 
-> __Dropper__ inherits from __Stream__, then you can use it in the way you __already__ use other streams ( pause(), resume(), write().. ).
+> __Dropper__ inherits from __Stream__, then you can use it in the way you __already__ use other streams
+> ( _pausing_, _resuming_, _writing_.. ) .
+
+> It simply _"slows down"_ or _"bufferizes"_ incoming data packets, depending on whether 
+> the received packet is smaller or larger than its own capacity.
 
 ---------
 
@@ -38,7 +40,7 @@
 
 ``` javascript
   var log = console.log,
-      dropper = require( 'dropper' ),
+      Dropper = require( 'dropper' ),
       path = __filename, // <- a test file path
       filter = new Dropper( 36 ); // output -> 36 bytes data packets
 
