@@ -13,7 +13,7 @@
 
 ###Installation
 
-> **Current Stable Version: 0.0.1 , compatible with nodeJS >= v0.4.x**
+> **Current __Unstable__ Version: 0.0.1 , compatible with nodeJS >= v0.4.x**
 
 > with __npm__ :
 
