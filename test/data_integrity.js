@@ -34,7 +34,7 @@ fs.readFile( path, null, function ( err, fdata ) {
                 // data.length === filter.dropsize, except for last packet ( <= )
                 try {
                     assert.ok( data.length <= filter.dropSize, 'Test Failed: data_integrity, last packet bad size ' );
-                    log( yc + 'Test ok ( last packet length <= dropSize ):', gc + data.length, '<=', rc + filter.dropSize + ec );
+                    log( yc + 'Test ok ( last output packet length <= dropSize ):', gc + data.length, '<=', rc + filter.dropSize + ec );
                 } catch ( err ) {
                     log( rc + '\nsomething went wrong..\n' );
                     log( err.stack, ec );
@@ -43,7 +43,7 @@ fs.readFile( path, null, function ( err, fdata ) {
             } else {
                 try {
                     assert.strictEqual( data.length, filter.dropSize, 'Test Failed: data_integrity, bad packet size ' );
-                    log( yc + 'Test ( packet length === dropSize ) ok:', gc + data.length, '===', rc + filter.dropSize + ec );
+                    log( yc + 'Test ( output packet length === dropSize ) ok:', gc + data.length, '===', rc + filter.dropSize + ec );
                 } catch ( err ) {
                     log( rc + '\nsomething went wrong..\n' );
                     log( err.stack, ec );
@@ -82,7 +82,8 @@ fs.readFile( path, null, function ( err, fdata ) {
     sourceStream = fs.createReadStream( path, { bufferSize : 138 } );
 
     sourceStream.on( 'data', function ( data ) {
-        log( bc + 'data src:', data, ec );
+        log( gc + 'input data:', bc, data, ec );
+        log( gc + 'input data length:', bc, data.length, ec )
     } );
     
     sourceStream.on( 'drain', function () {
