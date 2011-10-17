@@ -5,7 +5,7 @@
 > __Dropper__ inherits from __Stream__, then you can use it in the way you __already__ use other streams
 > ( _pausing_, _resuming_, _writing_.. ) .
 
-> It simply _"slows down"_ or _"bufferizes"_ incoming data packets, depending on whether 
+> It simply _"divides"_ or _"bufferizes"_ incoming data packets, depending on whether 
 > the received packet is smaller or larger than its own capacity.
 
 ---------
