@@ -48,9 +48,9 @@
   * except the last that could be <= dropSize
   */  
   filter.on( 'data', function ( data ) {
-      filter.pause()          // <- pausing stream
-      log( 'data:', data );   // <- print data
-      filter.resume()         // <- resuming stream 
+      filter.pause()          // <- pausing the stream to avoid the filter buffer overwriting
+      log( 'data:', data );   // <- print data ( do something with data )
+      filter.resume()         // <- resuming stream to receive other data
   } );
   
  /* 
