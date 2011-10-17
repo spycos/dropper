@@ -1,7 +1,6 @@
 # Dropper
 
-> __Dropper__ is a ( nodeJS ) __filter stream__ that produces __fixed size__ data packets from __any stream__
-> ( using a __single circular Buffer__ and mantaining __very good perfomances__ ).
+> __Dropper__ is a ( nodeJS ) __filter stream__ that produces __fixed size__ data packets from __any stream__, mantaining __very good perfomances__ ).
 
 > __Dropper__ inherits from __Stream__, then you can use it in the way you __already__ use other streams
 > ( _pausing_, _resuming_, _writing_.. ) .
@@ -13,7 +12,7 @@
 
 ###Installation
 
-> **Current __Unstable__ Version: 0.0.1 , compatible with nodeJS >= v0.4.x**
+> **Current __Stable__ Version: 0.0.2 , compatible with nodeJS >= v0.4.x**
 
 > with __npm__ :
 
@@ -44,17 +43,23 @@
       path = __filename, // <- a test file path
       filter = new Dropper( 36 ); // output -> 36 bytes data packets
 
+ /*
+  * all data packets will have fixed length ( dropSize ),
+  * except the last that could be <= dropSize
+  */  
   filter.on( 'data', function ( data ) {
-      // all packets will have fixed length ( dropSize ),
-      // except the last that could be <= dropSize
-      log( 'data:', data );
+      filter.pause()          // <- pausing stream
+      log( 'data:', data );   // <- print data
+      filter.resume()         // <- resuming stream 
   } );
   
-  // stream output -> 60 bytes packets, it's the max limit,
-  // packets are not guaranteed to have fixed size.
+ /* 
+  * stream output -> 60 bytes packets, it's the max limit,
+  * packets are not guaranteed to have fixed size.
+  */ 
   stream = fs.createReadStream( path, { bufferSize : 60 } );
   ..
-  stream.pipe( filter );
+  stream.pipe( filter ); // <- piping
   ..
   
 ```
