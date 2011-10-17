@@ -22,10 +22,10 @@ fs.readFile( path, null, function ( err, fdata ) {
     
     // dropper
 
-    filter = new Dropper( 100 );
+    filter = new Dropper( 11 );
 
     filter.on( 'data', function ( data ) {
-        filter.pause(); // <- pausing filter
+       filter.pause(); // <- pausing filter
        setTimeout( function (){
             log( tc + 'filter emits data:', data, ec );
             data.copy( output, o );
@@ -79,7 +79,7 @@ fs.readFile( path, null, function ( err, fdata ) {
 
     // source stream
 
-    sourceStream = fs.createReadStream( path, { bufferSize : 500 } );
+    sourceStream = fs.createReadStream( path, { bufferSize : 10 } );
 
     sourceStream.on( 'data', function ( data ) {
         log( bc + 'data src:', data, ec );
