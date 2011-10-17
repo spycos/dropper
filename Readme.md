@@ -53,13 +53,20 @@
       filter.resume()         // <- resuming stream to receive other data
   } );
   
- /* 
+  /*
   * stream output -> 60 bytes packets, it's the max limit,
   * packets are not guaranteed to have fixed size.
-  */ 
+  */
   stream = fs.createReadStream( path, { bufferSize : 60 } );
   ..
-  stream.pipe( filter ); // <- piping
+  
+ /*
+  *  nodeJS versions < 0.5 don't support pipe chaining,
+  *  because don't return the destination stream.
+  *  With dropper pipe(), instead, is always possible.
+  */
+  stream.pipe( filter );
+  filter.pipe( fs.createWriteStream( __dirname + '/drops.txt' ) );
   ..
   
 ```
