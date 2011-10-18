@@ -26,7 +26,7 @@ fs.readFile( path, null, function ( err, fdata ) {
     filter = new Dropper( 14 );
 
     filter.on( 'data', function ( data ) {
-        // filter.pause();  // <- for a better output log
+        filter.pause();  // <- for a better output log
         setTimeout( function (){
             log( tc + 'filter emits data:', data, ec );
             data.copy( output, o );
@@ -51,7 +51,7 @@ fs.readFile( path, null, function ( err, fdata ) {
                     filter.destroy();
                 }
             }
-            // filter.resume(); // <- for a better output log
+            filter.resume(); // <- for a better output log
         }, delay );
     } );
 
