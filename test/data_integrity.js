@@ -77,7 +77,7 @@ fs.readFile( path, null, function ( err, fdata ) {
 
     // source stream
 
-    sourceStream = fs.createReadStream( path, { bufferSize : 12 } );
+    sourceStream = fs.createReadStream( path, { bufferSize : 18 } );
 
     sourceStream.on( 'data', function ( data ) {
         log( gc + 'input data:', bc, data, ec );
