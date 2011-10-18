@@ -3,7 +3,7 @@ var log = console.log,
     crypto = require( 'crypto' ),
     fs = require( 'fs' ),
     Dropper = require( '../index' ),
-    path = __filename, //  __dirname + '/../examples/numbers.txt',
+    path = __dirname + '/../examples/numbers.txt', //  __filename, //  __dirname + '/../examples/numbers.txt',
     checksum = null,
     output = null, o = 0,
     filter = null, sourceStream = null,
@@ -22,7 +22,7 @@ fs.readFile( path, null, function ( err, fdata ) {
     
     // dropper
 
-    filter = new Dropper( 37 );
+    filter = new Dropper( 10 );
 
     filter.on( 'data', function ( data ) {
         filter.pause();
@@ -79,7 +79,7 @@ fs.readFile( path, null, function ( err, fdata ) {
 
     // source stream
 
-    sourceStream = fs.createReadStream( path, { bufferSize : 138 } );
+    sourceStream = fs.createReadStream( path, { bufferSize : 12 } );
 
     sourceStream.on( 'data', function ( data ) {
         log( gc + 'input data:', bc, data, ec );
@@ -99,7 +99,15 @@ fs.readFile( path, null, function ( err, fdata ) {
         log( rc + 'source stream emits error:', err.stack, ec + '\n' );
     } );
     
-    sourceStream.pipe( filter, { end : true } );
+
+    var ofilter = new Dropper( 3 );
+    
+    ofilter.on( 'data', function ( data ) {
+    } );
+
+    sourceStream.pipe( ofilter, { end : true } );
+
+    ofilter.pipe( filter );
 
 } );
 
