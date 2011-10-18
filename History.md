@@ -1,6 +1,11 @@
 0.0.3 / 2010-10-18
 ==================
   
+  * less Buffer instances
+
+0.0.3 / 2010-10-18
+==================
+  
   * went back to code version 0.0.1
   * added Buffer instances and slice()
   * thanks @isaacs
