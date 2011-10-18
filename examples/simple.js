@@ -62,3 +62,4 @@ rs.on( 'error', function ( err ) {
 } );
 
 rs.pipe( filter, { end : true } );
+
