@@ -22,12 +22,12 @@ var log = console.log,
     };
 
 log( '\n-> benchmark test1 <-' );
-
-cycles = 1;
+/**/
+cycles = 8;
 isize = 1024 * 100;
-filter = new Dropper( isize );
-paper = new Dropper( isize );
-sourceBuffer = new Buffer( isize );
+filter = new Dropper( 7 );
+paper = new Dropper( 7 );
+sourceBuffer = new Buffer( 'ciaobellabionda' );
 
 ochecksum = crypto.createHash( 'sha1' );
 fchecksum = crypto.createHash( 'sha1' );
@@ -35,6 +35,14 @@ pchecksum = crypto.createHash( 'sha1' );
 
 filter.on( 'data', function ( data ) {
     fchecksum.update( data );
+    var before = data.toString();
+    // simulate a slow write operation or something 
+    setTimeout( function () {
+        var after = data.toString();
+        for ( var i = 0; i < 4; i ++ ) { data[ i ] = "x".charCodeAt( 0 ); } 
+        log( before, after );
+        //assert.ok( before === after );
+    }, 100 );
 } );
 
 paper.on( 'data', function ( data ) {
@@ -67,7 +75,7 @@ if ( filter.destroy ) {
 }
 log( '<- end test 1 ->\n' );
 
-/**/
+/** /
 log( '-> benchmark test2 <-' );
 isize = 1024 * 12;
 fsize = 1 + isize / 2;
@@ -99,6 +107,7 @@ paper.on( 'end', function ( data ) {
 paper.on( 'end', printResults( isize, fsize, psize ) );
 
 filter.pipe( paper );
+
 i = 0;
 stime = Date.now();
 for( ; i < cycles; ++i ) {
@@ -112,16 +121,17 @@ if ( filter.destroy ) {
     paper.destroy();
 }
 log( '<- end test 2 ->\n' );
-/**/
+/** /
 log( '-> benchmark test3 <-' );
 
 isize = 1024;
 fsize = isize * 2;
 psize = 1 + isize / 2;
-cycles = 1;
+cycles = 1024 * 1;
 filter = new Dropper( fsize );
 paper = new Dropper( psize );
 sourceBuffer = new Buffer( isize );
+
 ochecksum = crypto.createHash( 'sha1' );
 fchecksum = crypto.createHash( 'sha1' );
 pchecksum = crypto.createHash( 'sha1' );
@@ -145,6 +155,7 @@ paper.on( 'end', function ( data ) {
 paper.on( 'end', printResults( isize, fsize, psize ) );
 
 filter.pipe( paper );
+
 i = 0;
 stime = Date.now();
 for( ; i < cycles; ++i ) {
@@ -152,13 +163,6 @@ for( ; i < cycles; ++i ) {
     ochecksum.update( sourceBuffer );
 }
 log( 'original checksum :', ochecksum.digest( 'hex' ) );
-
-filter.pipe( paper );
-i = 0;
-stime = Date.now();
-for( ; i < cycles; ++i ) {
-    filter.write( sourceBuffer );
-}
 filter.end( sourceBuffer );
 if ( filter.destroy ) {
     filter.destroy();
