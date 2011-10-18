@@ -9,7 +9,8 @@ var log = console.log,
     filter = null, sourceStream = null,
     rc = '\033[1;31m', gc = '\033[1;32m', yc = '\033[1;33m',
     tc = '\033[1;44m', bc = '\033[1;39m', xc = '\033[1;35m',
-    ec = '\033[0m';
+    ec = '\033[0m',
+    delay = 300;
 
 fs.readFile( path, null, function ( err, fdata ) {
     if ( err ) {
@@ -22,10 +23,10 @@ fs.readFile( path, null, function ( err, fdata ) {
     
     // dropper
 
-    filter = new Dropper( 4 );
+    filter = new Dropper( 14 );
 
     filter.on( 'data', function ( data ) {
-        filter.pause();  // <- only for better output log
+        // filter.pause();  // <- for a better output log
         setTimeout( function (){
             log( tc + 'filter emits data:', data, ec );
             data.copy( output, o );
@@ -50,8 +51,8 @@ fs.readFile( path, null, function ( err, fdata ) {
                     filter.destroy();
                 }
             }
-            filter.resume(); // <- only for better output log
-        }, 100 );
+            // filter.resume(); // <- for a better output log
+        }, delay );
     } );
 
     filter.on( 'drain', function () {
@@ -71,7 +72,7 @@ fs.readFile( path, null, function ( err, fdata ) {
                 log( rc + 'checksums:', gc + checksum, '!==', rc + resultChecksum, '\n' );                
                 log( err.stack, ec, '\n' );
             }
-        }, 100 );
+        }, delay );
     } );
 
     filter.on( 'close', function () {
