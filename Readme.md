@@ -1,6 +1,6 @@
 # Dropper
 
-> __Dropper__ is a ( nodeJS ) __filter stream__ that produces __fixed size__ data packets from __any stream__, mantaining __very good perfomances__ ).
+> __Dropper__ is a ( nodeJS ) __filter stream__ that produces __fixed size__ data packets from __any stream__, mantaining __very good perfomances__ .
 
 > __Dropper__ inherits from __Stream__, then you can use it in the way you __already__ use other streams
 > ( _pausing_, _resuming_, _writing_.. ) .
