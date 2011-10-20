@@ -101,7 +101,7 @@ fs.readFile( path, null, function ( err, fdata ) {
     } );
     
 
-    var ofilter = new Dropper( 3 );
+    var ofilter = new Dropper( 13 );
     
     ofilter.on( 'data', function ( data ) {
     } );

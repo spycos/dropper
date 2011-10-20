@@ -12,7 +12,7 @@
 
 ###Installation
 
-> **Current __Stable__ Version: 0.0.5 , compatible with nodeJS >= v0.4.x**
+> **Current __Stable__ Version: 0.0.6 , compatible with nodeJS >= v0.4.x**
 
 > with __npm__ :
 
@@ -31,8 +31,9 @@
 ###Simple Usage
 
 ``` javascript
-  var dropSize = 64 * 1024, // <- default bytes value
-      filter = new dropper( dropSize );
+  var opt = { pad : 0x0 }, // <- add leading 0s to last packet for mantaining a constant size 
+      dropSize = 64 * 1024, // <- default bytes value
+      filter = new dropper( dropSize, opt );
 ```
 
 > Try this, or just run the __[example](https://github.com/rootslab/dropper/blob/master/examples/)__ :

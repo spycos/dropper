@@ -15,7 +15,7 @@ fs.stat( path, function ( err, stats ) {
 
 // dropper
 
-filter = new Dropper( 36, { pad : 0xff } );
+filter = new Dropper( 36 );
 
 filter.on( 'data', function ( data ) {
     filter.pause(); // <- pausing filter
@@ -38,7 +38,7 @@ filter.on( 'close', function () {
 
 // source stream
 
-rs = fs.createReadStream( path, { bufferSize : 20 } );
+rs = fs.createReadStream( path, { bufferSize : 40 } );
 
 rs.on( 'data', function ( data ) {
     log( yc + 'source stream emits data, length:', data.length + ec );
