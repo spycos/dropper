@@ -12,7 +12,7 @@
 
 ###Installation
 
-> **Current __Stable__ Version: 0.076 , compatible with nodeJS >= v0.4.x**
+> **Current __Stable__ Version: 0.0.7 , compatible with nodeJS >= v0.4.x**
 
 > with __npm__ :
 
