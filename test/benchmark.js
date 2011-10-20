@@ -13,7 +13,6 @@ var log = console.log,
         ( tc = '\033[1;44m' ) && ( bc = '\033[1;39m' ) && ( xc = '\033[1;35m' ) &&
           ( wc = '\033[1;42m') && ( ec = '\033[0m' ) ) : null,
     // vars
-    path = __filename,
     isize = 0, tsize = 0, fsize = 0, psize = 0, cycles = 0, 
     wtime = 0, ftime = 0, stime = 0, expected = 0,
     filter = null, paper = null, stack = null,
@@ -90,7 +89,7 @@ var log = console.log,
         writeData( filter, cycles, isize, tsize );
     },
     init = function () {
-        tsize = 10 * 1024 * 1024; // bytes
+        tsize = 64 * 1024; // bytes
         stack = new Buffer( tsize, { nopad : true } );  // <- { nopad : true } is only for block-stream lib
         log( '\n' + rc, 'Using', ( ( useBlockStream ) ? 'block-stream' : 'dropper' ), 'library..', ec, '\n' );
         log( tc, 'Filling the stack buffer with', ( tsize / 1024 / 1024 ).toFixed( 2 ), 'MBytes of data', ec );
@@ -107,7 +106,7 @@ fsize = psize = isize;
 go();
 
 log( '\n' + gc + '-> starting test 2 <-' + ec + '\n' );
-cycles = 256;
+cycles = 1;
 isize = 64 * 1024;
 fsize = Math.ceil( isize * 3.141516 );
 psize = Math.ceil( isize / 6 );
