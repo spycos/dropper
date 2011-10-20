@@ -89,8 +89,8 @@ var log = console.log,
         writeData( filter, cycles, isize, tsize );
     },
     init = function () {
-        tsize = 64 * 1024; // bytes
-        stack = new Buffer( tsize, { nopad : true } );  // <- { nopad : true } is only for block-stream lib
+        tsize = 6 * 1024 * 1024; // bytes
+        stack = new Buffer( tsize );
         log( '\n' + rc, 'Using', ( ( useBlockStream ) ? 'block-stream' : 'dropper' ), 'library..', ec, '\n' );
         log( tc, 'Filling the stack buffer with', ( tsize / 1024 / 1024 ).toFixed( 2 ), 'MBytes of data', ec );
         for ( i = 0; i < tsize; stack[ i++ ] = i & 255 );
@@ -106,7 +106,7 @@ fsize = psize = isize;
 go();
 
 log( '\n' + gc + '-> starting test 2 <-' + ec + '\n' );
-cycles = 1;
+cycles = 256;
 isize = 64 * 1024;
 fsize = Math.ceil( isize * 3.141516 );
 psize = Math.ceil( isize / 6 );
