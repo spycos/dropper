@@ -1,3 +1,8 @@
+0.0.7 / 2010-10-20
+==================
+  
+  * added benchmarks for dropper and block-stream
+
 0.0.6 / 2010-10-20
 ==================
   

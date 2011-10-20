@@ -1,6 +1,6 @@
 {
     "name": "dropper"
-  , "version": "0.0.6"
+  , "version": "0.0.7"
   , "description": "Dropper, is a filter stream that produces fixed size data packets, from every other stream."
   , "homepage" : "https://github.com/rootslab/dropper"
   ,"repository" : {

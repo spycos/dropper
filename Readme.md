@@ -12,7 +12,7 @@
 
 ###Installation
 
-> **Current __Stable__ Version: 0.0.6 , compatible with nodeJS >= v0.4.x**
+> **Current __Stable__ Version: 0.076 , compatible with nodeJS >= v0.4.x**
 
 > with __npm__ :
 
@@ -77,6 +77,7 @@
 
 ``` bash
  $ node test/data_integrity.js
+ $ node test/benchmark.js [ 1 ] // <- a truthy value for switching from dropper to block-stream module use
 ```
 
 ## License 
