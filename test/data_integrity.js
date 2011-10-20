@@ -10,7 +10,7 @@ var log = console.log,
     rc = '\033[1;31m', gc = '\033[1;32m', yc = '\033[1;33m',
     tc = '\033[1;44m', bc = '\033[1;39m', xc = '\033[1;35m',
     ec = '\033[0m',
-    delay = 300;
+    delay = 30;
 
 fs.readFile( path, null, function ( err, fdata ) {
     if ( err ) {
@@ -23,7 +23,7 @@ fs.readFile( path, null, function ( err, fdata ) {
     
     // dropper
 
-    filter = new Dropper( 14 );
+    filter = new Dropper( 36 );
 
     filter.on( 'data', function ( data ) {
         filter.pause();  // <- for a better output log
@@ -80,7 +80,7 @@ fs.readFile( path, null, function ( err, fdata ) {
 
     // source stream
 
-    sourceStream = fs.createReadStream( path, { bufferSize : 27 } );
+    sourceStream = fs.createReadStream( path, { bufferSize : 80 } );
 
     sourceStream.on( 'data', function ( data ) {
         log( gc + 'input data:', bc, data, ec );
