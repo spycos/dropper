@@ -70,7 +70,7 @@
   
 ```
 ----------
-###Run Tests
+###Run Tests & Benchmarks
 
 > Just :
 
